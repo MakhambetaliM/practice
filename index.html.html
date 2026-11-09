@@ -1,0 +1,389 @@
+<!DOCTYPE html>
+<html lang="kk" data-theme="dark">
+<head>
+<meta charset="utf-8">
+<meta name="viewport" content="width=device-width, initial-scale=1, viewport-fit=cover">
+<title>Өндірістік практика есебі — Махамбетали Мағжан</title>
+<link href="https://fonts.googleapis.com/css2?family=Manrope:wght@400;600;800&family=JetBrains+Mono:wght@500&display=swap" rel="stylesheet">
+<style>
+:root{--bg:#070a16;--bg2:#0f1428;--card:rgba(20,26,52,.6);--tx:#eef0ff;--mu:#9aa4cf;--ac:#8b7dff;--ac2:#2ee6c8;--bd:rgba(150,160,230,.16);--sh:0 18px 50px rgba(0,0,0,.45);box-sizing:border-box;padding-top:env(safe-area-inset-top,0px);padding-bottom:env(safe-area-inset-bottom,0px);color-scheme:dark}
+:root[data-theme="light"]{--bg:#f2f4fb;--bg2:#fff;--card:rgba(255,255,255,.8);--tx:#14182b;--mu:#5c6485;--ac:#5b4bff;--ac2:#00a58f;--bd:#dfe3f3;--sh:0 10px 30px rgba(40,50,120,.1);color-scheme:light}
+html{scroll-behavior:smooth;scroll-padding-top:70px}
+*{box-sizing:border-box}
+body{margin:0;background:radial-gradient(900px 520px at 85% -5%,rgba(139,125,255,.18),transparent 70%),radial-gradient(800px 500px at -10% 45%,rgba(46,230,200,.09),transparent 70%),var(--bg);background-attachment:fixed;color:var(--tx);font:16px/1.6 Manrope,system-ui,sans-serif}
+#pr{position:fixed;top:0;left:0;height:3px;width:0;background:linear-gradient(90deg,var(--ac),var(--ac2));z-index:50}
+nav{position:sticky;top:0;z-index:40;display:flex;gap:6px;align-items:center;padding:10px 14px;background:color-mix(in srgb,var(--bg) 85%,transparent);backdrop-filter:blur(12px);border-bottom:1px solid var(--bd);overflow-x:auto;white-space:nowrap}
+nav a{color:var(--mu);text-decoration:none;font-weight:600;font-size:14px;padding:6px 12px;border-radius:99px}
+nav a:hover,nav a.on{background:var(--ac);color:#fff}
+#th{margin-left:auto;border:1px solid var(--bd);background:var(--card);color:var(--tx);border-radius:99px;padding:6px 12px;cursor:pointer}
+section{max-width:960px;margin:0 auto;padding:56px 18px 8px}
+h2{font-size:clamp(24px,5vw,34px);margin:0 0 6px;font-weight:800}
+.sub{color:var(--mu);margin:0 0 24px}
+.tag{display:inline-block;font:500 12px 'JetBrains Mono',monospace;color:var(--ac);border:1px solid var(--ac);padding:4px 12px;border-radius:99px;margin-bottom:16px}
+h1{font-size:clamp(34px,8vw,64px);line-height:1.08;margin:0 0 14px;font-weight:800}
+h1 span{background:linear-gradient(90deg,var(--ac),var(--ac2));-webkit-background-clip:text;background-clip:text;color:transparent}
+.btn{display:inline-block;background:var(--ac);color:#fff;border:0;padding:12px 22px;border-radius:12px;font:700 15px Manrope,sans-serif;cursor:pointer;text-decoration:none;transition:.2s}
+.btn:hover{transform:translateY(-2px);box-shadow:0 8px 20px rgba(91,75,255,.35)}
+.btn.o{background:transparent;color:var(--tx);border:1px solid var(--bd)}
+.stats{display:grid;grid-template-columns:repeat(auto-fit,minmax(140px,1fr));gap:12px;margin-top:34px}
+.card{background:var(--card);border:1px solid var(--bd);border-radius:18px;padding:18px;box-shadow:var(--sh)}
+.stat b{font-size:34px;display:block;color:var(--ac);font-weight:800}
+.stat small{color:var(--mu)}
+.chips{display:flex;gap:8px;flex-wrap:wrap;margin-bottom:18px}
+.chip{border:1px solid var(--bd);background:var(--card);color:var(--tx);padding:7px 14px;border-radius:99px;cursor:pointer;font:600 13px Manrope,sans-serif}
+.chip.on{background:var(--ac);color:#fff;border-color:var(--ac)}
+.tl{position:relative;padding-left:26px;border-left:2px dashed var(--bd);display:grid;gap:12px}
+.tl .it{position:relative;cursor:pointer;transition:.25s}
+.tl .it:before{content:"";position:absolute;left:-35px;top:22px;width:14px;height:14px;border-radius:50%;background:var(--ac);border:3px solid var(--bg)}
+.tl .it:hover{transform:translateX(4px)}
+.dt{font:500 12px 'JetBrains Mono',monospace;color:var(--ac2)}
+.it p{margin:4px 0 0}
+.it .more{display:none;margin-top:8px;color:var(--mu);font-size:14px}
+.it.open .more{display:block}
+.tabs{display:flex;gap:8px;flex-wrap:wrap;margin-bottom:14px}
+.tp ul{margin:8px 0 0;padding-left:20px;color:var(--mu)}
+.bar{margin:12px 0}.bar div{display:flex;justify-content:space-between;font-size:14px;font-weight:600}
+.bar i{display:block;height:10px;border-radius:9px;background:var(--bd);margin-top:5px;overflow:hidden}
+.bar i b{display:block;height:100%;width:0;border-radius:9px;background:linear-gradient(90deg,var(--ac),var(--ac2));transition:width 1.2s cubic-bezier(.2,.8,.2,1)}
+.two{display:grid;grid-template-columns:repeat(auto-fit,minmax(260px,1fr));gap:14px}
+.donut{width:170px;height:170px;border-radius:50%;margin:auto;background:conic-gradient(var(--ac) 0 40%,var(--ac2) 40% 70%,#ffb020 70% 90%,#ff5d7a 90% 100%);display:grid;place-items:center}
+.donut:after{content:"4 жүйе";width:105px;height:105px;border-radius:50%;background:var(--bg2);display:grid;place-items:center;font-weight:800}
+.lg{list-style:none;padding:0;margin:14px 0 0;font-size:14px}.lg li:before{content:"●";margin-right:8px}
+.lg li:nth-child(1):before{color:var(--ac)}.lg li:nth-child(2):before{color:var(--ac2)}.lg li:nth-child(3):before{color:#ffb020}.lg li:nth-child(4):before{color:#ff5d7a}
+details{background:var(--card);border:1px solid var(--bd);border-radius:14px;padding:12px 16px;margin-bottom:10px}
+summary{cursor:pointer;font-weight:700}details p{color:var(--mu);margin:8px 0 0}
+.tier{text-align:center}.tier h3{margin:0}.tier.g{border-color:#ffb020}.tier.b{background:#0b0b12;color:#fff}
+.q{font-weight:700;font-size:18px;margin:6px 0 14px}
+.opt{display:block;width:100%;text-align:left;margin:8px 0;padding:12px 14px;border-radius:12px;border:1px solid var(--bd);background:var(--bg);color:var(--tx);font:600 15px Manrope,sans-serif;cursor:pointer}
+.opt:hover{border-color:var(--ac)}.opt.ok{background:#14b86a;color:#fff;border-color:#14b86a}.opt.no{background:#ef4565;color:#fff;border-color:#ef4565}
+.stars button{background:none;border:0;font-size:30px;cursor:pointer;color:var(--bd);padding:0 2px}.stars button.on{color:#ffb020}
+textarea,select{width:100%;padding:12px;border-radius:12px;border:1px solid var(--bd);background:var(--bg);color:var(--tx);font:15px Manrope,sans-serif}
+label{display:block;font-weight:700;margin:16px 0 6px}
+.mk{display:flex;gap:14px;flex-wrap:wrap;margin:6px 0}.mk label{font-weight:500;margin:0}
+.chat{display:flex;flex-direction:column;gap:10px;max-height:420px;overflow-y:auto;margin-bottom:12px}.m{padding:10px 14px;border-radius:16px;max-width:88%;white-space:pre-wrap;font-size:15px}.m.u{align-self:flex-end;background:var(--ac);color:#fff}.m.a{align-self:flex-start;background:var(--bg);border:1px solid var(--bd)}.row{display:flex;gap:8px}.row input{flex:1;min-width:0;padding:12px;border-radius:12px;border:1px solid var(--bd);background:var(--bg);color:var(--tx);font:15px Manrope,sans-serif}
+#ub{margin-left:auto;white-space:nowrap}#th{margin-left:6px}
+#lg{position:fixed;inset:0;z-index:100;display:none;place-items:center;padding:18px;background:rgba(10,12,30,.65);backdrop-filter:blur(8px)}#lg.on{display:grid}
+#lg .card{width:100%;max-width:400px;max-height:92vh;overflow-y:auto}
+.fi{width:100%;padding:12px;border-radius:12px;border:1px solid var(--bd);background:var(--bg);color:var(--tx);font:15px Manrope,sans-serif;margin-bottom:10px}
+.err{color:#ef4565;font-weight:600;min-height:20px;font-size:14px}.okc{color:#14b86a}
+.stu{display:grid;gap:8px}.stu .row{flex-wrap:wrap}
+footer{text-align:center;color:var(--mu);padding:50px 18px 40px;font-size:14px}
+.rv{opacity:0;transform:translateY(24px);transition:.7s}.rv.in{opacity:1;transform:none}
+.pill{font-size:12px;background:color-mix(in srgb,var(--ac) 14%,transparent);color:var(--ac);padding:2px 10px;border-radius:99px;font-weight:700}
+
+html{background:var(--bg)}
+.hero{max-width:none;min-height:92vh;padding-inline:max(18px,calc((100vw - 960px)/2));position:relative;overflow:hidden;display:flex;flex-direction:column;justify-content:center}
+.hero>*{position:relative;z-index:1}
+#gl{position:absolute;right:0;top:0;width:58%;height:100%;z-index:0;pointer-events:none}
+h1{font-size:clamp(36px,7vw,68px);letter-spacing:-.03em;max-width:680px}
+.hero .sub{max-width:560px}
+nav{background:color-mix(in srgb,var(--bg) 70%,transparent);backdrop-filter:blur(16px) saturate(1.4)}
+nav a{transition:.2s}
+.card{background:var(--card);backdrop-filter:blur(12px);-webkit-backdrop-filter:blur(12px);transition:border-color .25s,box-shadow .25s}
+.card:hover{border-color:color-mix(in srgb,var(--ac) 50%,transparent);box-shadow:var(--sh),0 0 32px color-mix(in srgb,var(--ac) 14%,transparent)}
+.btn{background:linear-gradient(135deg,var(--ac),#5b4bff);box-shadow:0 6px 22px color-mix(in srgb,var(--ac) 35%,transparent)}
+.btn.o{background:transparent;box-shadow:none}
+.stat b{background:linear-gradient(90deg,var(--ac),var(--ac2));-webkit-background-clip:text;background-clip:text;color:transparent}
+.tier.b{background:linear-gradient(135deg,#0b0b16,#241a52);border-color:var(--ac)}
+.tier.g{box-shadow:0 0 30px rgba(255,176,32,.18)}
+h2{letter-spacing:-.02em}
+.card{position:relative}
+.card::after{content:"";position:absolute;inset:0;border-radius:inherit;pointer-events:none;background:radial-gradient(240px circle at var(--mx,50%) var(--my,50%),color-mix(in srgb,var(--ac) 16%,transparent),transparent 70%);opacity:0;transition:opacity .25s}
+.card:hover::after{opacity:1}
+.hint{color:var(--mu);font-size:13px;margin:14px 0 0}
+#tip{position:fixed;display:none;z-index:90;pointer-events:none;background:var(--bg2);border:1px solid var(--bd);padding:4px 10px;border-radius:8px;font:600 13px Manrope,sans-serif;color:var(--tx)}
+.term{background:#05070f;border:1px solid var(--bd);border-radius:16px;overflow:hidden;font:14px/1.6 'JetBrains Mono',monospace;color:#b8f5e6;box-shadow:var(--sh)}
+.th2{display:flex;align-items:center;gap:6px;padding:10px 14px;background:#0c1020;color:#8a93bd;font-size:12px}
+.th2 i{width:10px;height:10px;border-radius:50%;background:#ff5d7a}.th2 i:nth-child(2){background:#ffb020}.th2 i:nth-child(3){background:#2ee6c8}.th2 span{margin-left:8px}
+#to{padding:12px 14px 0;max-height:280px;overflow-y:auto;white-space:pre-wrap;word-break:break-word}
+.tin{display:flex;gap:8px;padding:6px 14px 14px}.tin span{color:var(--ac2)}.tin input{flex:1;min-width:0;background:none;border:0;outline:0;color:#fff;font:inherit;font-size:16px}
+:focus-visible{outline:2px solid var(--ac2);outline-offset:2px}
+@media(max-width:760px){#gl{width:100%;opacity:.5}.hero{min-height:88vh}}
+</style>
+</head>
+<body>
+<div id="pr"></div>
+<nav>
+<a href="#top">Басты</a><a href="#days">Күнделік</a><a href="#org">ДИТЦ</a><a href="#sys">Жүйелер</a><a href="#qais">QAIS</a><a href="#term">Терминал</a><a href="#ai">AI ✨</a><a href="#quiz">Тест</a><a href="#poll">Сауалнама</a>
+<button id="ub" class="chip">🔐 Кіру</button><button id="th" aria-label="Тақырып">🌓</button>
+</nav>
+
+<div id="lg"><div class="card">
+<div class="tabs"><button class="chip on" id="tin">Кіру</button><button class="chip" id="tup">Тіркелу</button></div>
+<div id="fup" style="display:none"><input class="fi" id="lg_n" placeholder="Аты-жөні">
+<select class="fi" id="lg_r"><option value="student">🎓 Студент</option><option value="teacher">👩‍🏫 Оқытушы</option></select>
+<input class="fi" id="lg_c" placeholder="Оқытушы коды" style="display:none"></div>
+<input class="fi" id="lg_l" placeholder="Логин (a-z, 0-9, 3–20 таңба)" autocapitalize="none" autocomplete="username">
+<input class="fi" id="lg_p" type="password" placeholder="Құпия сөз (кемінде 6 таңба)" autocomplete="current-password">
+<div class="err" id="lg_m"></div>
+<button class="btn" id="lg_go" style="width:100%">Кіру</button>
+<p style="text-align:center;margin:12px 0 0"><button class="chip" id="lg_g">Қонақ ретінде қарау</button></p>
+<small style="color:var(--ac2);display:block;margin-top:10px">Демо: студент — magzhan / magzhan2026 · оқытушы — teacher / teacher2026</small>
+<small id="lg_b" style="color:var(--mu);display:block;margin-top:10px"></small>
+</div></div>
+
+<section class="hero" id="top">
+<canvas id="gl" aria-hidden="true"></canvas>
+<span class="tag">// ӨНДІРІСТІК ПРАКТИКА · 2026</span>
+<h1>Цифрлық университеттің<br><span>«жүрегінде»</span> 13 күн</h1>
+<p class="sub" style="max-width:600px">Махамбетали Мағжан Ерлікұлы · ВТКО-201 · 6B06103 «Есептеу техникасы және бағдарламалық қамтамасыз ету». Орны: Қ.Жұбанов атындағы АӨУ, ДИТЦ бөлімі.</p>
+<div><a class="btn" href="#days">Есепті ашу →</a> <a class="btn o" href="#quiz">Тестті бастау</a></div>
+<p class="hint">💡 3D модельдегі түсті шарларды басып көріңіз: олар жүйелерге апарады</p>
+<div class="stats">
+<div class="card stat"><b data-n="13">0</b><small>практика күні</small></div>
+<div class="card stat"><b data-n="39">0</b><small>қызметкер тобында</small></div>
+<div class="card stat"><b data-n="6">0</b><small>оқу корпусы</small></div>
+<div class="card stat"><b data-n="4">0</b><small>жатақхана</small></div>
+</div>
+</section>
+
+<section id="days" class="rv">
+<h2>Практика күнделігі</h2>
+<p class="sub">12–29 мамыр 2026. Санатпен сүзіп, қызыққан күніңізді басыңыз.</p>
+<div class="chips" id="chips"></div>
+<div class="tl" id="tl"></div>
+</section>
+
+<section id="org" class="rv">
+<h2>ДИТЦ: құрылым және рөлдер</h2>
+<p class="sub">Бөлім екі тармақтан тұрады. Рөлді басып, міндеттерін көріңіз.</p>
+<div class="two" style="margin-bottom:18px">
+<div class="card"><span class="pill">Топ 1</span><h3>Техникалық қолдау және желі</h3><p>39 инженер-техник пен жүйелік әкімші: өтінімдер, LAN, проекторлар, интерактивті тақталар.</p></div>
+<div class="card"><span class="pill">Топ 2</span><h3>Серверлік және БҚ тобы</h3><p>1 жоғары білікті маман: Macroscop, СХД, PERCo Web, backup, киберқауіпсіздік.</p></div>
+</div>
+<div id="roles"></div>
+</section>
+
+<section id="sys" class="rv">
+<h2>Жүйелер мен құралдар</h2>
+<p class="sub">Практикада зерттелген негізгі бағдарламалар.</p>
+<div class="tabs" id="tabs"></div>
+<div class="card tp" id="tp"></div>
+<h2 style="margin-top:44px">Жүйелерді талдау</h2>
+<p class="sub">Сенімділік көрсеткіші және жүйелердің үлесі (есеп, 3.2-бөлім).</p>
+<div class="two">
+<div class="card"><b>Сенімділік, %</b><div id="bars"></div></div>
+<div class="card"><b>Жүйелердің үлесі</b><div class="donut" style="margin-top:14px"></div>
+<ul class="lg"><li>Macroscop бейнебақылау — 40%</li><li>PERCo Web (СКУД) — 30%</li><li>Желілік диагностика — 20%</li><li>Қызметтік есеп (Excel) — 10%</li></ul></div>
+</div>
+</section>
+
+<section id="qais" class="rv">
+<h2>Жеке тапсырма: QAIS</h2>
+<p class="sub">Qazaq Arena Intelligence System — компьютерлік клубқа арналған AI веб-платформа.</p>
+<div class="two">
+<div class="card"><h3>Технологиялар</h3><p>HTML5/CSS3 → JavaScript · Llama 3.2 Vision · C#/.NET Core · SQL Server · WebSocket</p></div>
+<div class="card"><h3>Модульдер</h3><p>DashboardController, ArenaAIProvider, BookingManager, MembershipModule, ViewBridge.</p></div>
+</div>
+<h3 style="margin-top:26px">Мүшелік деңгейлері</h3>
+<div class="two">
+<div class="card tier"><h3>Silver</h3><p>Базалық тариф</p></div>
+<div class="card tier g"><h3>Gold</h3><p>Жеңілдіктер + басымдық</p></div>
+<div class="card tier b"><h3>Black VIP</h3><p>Барлық артықшылықтар</p></div>
+</div>
+<h3 style="margin-top:26px">Брондау симуляторы</h3>
+<div class="card">
+<label>Зона</label><select id="zn"><option>Arena Ultra</option><option>VIP</option><option>Lounge</option></select>
+<label>Сағат саны: <b id="hv">2</b></label><input type="range" id="hr" min="1" max="8" value="2" style="width:100%">
+<label>Мүшелік</label><select id="mb"><option value="0">Silver — 0%</option><option value="5">Gold — 5%</option><option value="10">Black VIP — 10%</option></select>
+<p id="bk" style="font-weight:700;color:var(--ac)"></p>
+<small style="color:var(--mu)">Демо: бағалар шартты, нақты тарифтерге байланысты емес.</small>
+</div>
+</section>
+
+<section id="cab" style="display:none"><h2>Жеке кабинет</h2><p class="sub" id="cb_s"></p><div id="cb"></div><p><button class="btn o" id="lo">Шығу</button></p></section>
+
+<section id="term" class="rv">
+<h2>ДИТЦ терминалы</h2>
+<p class="sub">Командаларды жазып көріңіз. Бастау үшін: help</p>
+<div class="term"><div class="th2"><i></i><i></i><i></i><span>magzhan@dits:~</span></div><div id="to"></div><div class="tin"><span>$</span><input id="ti" autocomplete="off" autocapitalize="none" spellcheck="false" aria-label="Команда"></div></div>
+</section>
+
+<section id="ai" class="rv">
+<h2>AI көмекші ✨</h2>
+<p class="sub">Claude практика есебі бойынша сұрақтарға жауап береді. Бірінші сұрақта рұқсат сұралуы мүмкін.</p>
+<div class="card">
+<div class="chips" id="sg"></div>
+<div class="chat" id="ch"><div class="m a">Сәлем! Мен Мағжанның практика есебі туралы сұрақтарға жауап беремін. Не білгіңіз келеді?</div></div>
+<div class="row"><input id="ai_in" placeholder="Сұрағыңызды жазыңыз..."><button class="btn" id="ai_go">Жіберу</button></div>
+<p style="margin:12px 0 0"><button class="btn o" id="ai_q">🎲 AI-дан жаңа тест сұрағы</button></p>
+<div id="ai_qb"></div>
+</div>
+</section>
+
+<section id="quiz" class="rv">
+<h2>Мини-тест</h2>
+<p class="sub">Практика материалы бойынша 8 сұрақ.</p>
+<div class="card" id="qb"></div>
+</section>
+
+<section id="poll" class="rv">
+<h2>Сауалнама</h2>
+<p class="sub">Сайт пен есеп туралы пікіріңізді қалдырыңыз.</p>
+<div class="card" id="pb">
+<label>Есеп қаншалықты түсінікті?</label><div class="stars" id="st"></div>
+<label>Қай бөлім ұнады?</label>
+<div class="mk" id="mk"></div>
+<label>Практиканы қалай бағалайсыз?</label>
+<select id="sv"><option>Өте пайдалы</option><option>Пайдалы</option><option>Орташа</option></select>
+<label>Ұсыныс / пікір</label><textarea id="cm" rows="3" placeholder="Жазыңыз..."></textarea>
+<p><button class="btn" id="sb">Жіберу</button></p>
+<div id="res"></div>
+</div>
+</section>
+
+<footer>© 2026 Махамбетали Мағжан · Қ.Жұбанов атындағы АӨУ · Ақтөбе<br>Әдебиеттер: MDN Web Docs, W3Schools, ДИТЦ ішкі құжаттары</footer>
+
+<script src="https://cdnjs.cloudflare.com/ajax/libs/three.js/r128/three.min.js"></script>
+<script>
+const $=s=>document.querySelector(s);
+const D=[["12.05","Мекеме құрылымымен және қауіпсіздік техникасымен таныстым. Жұмыс тәртібін зерттедім.","Қауіпсіздік","Практиканың алғашқы күні: ішкі тәртіп, қызметкерлер міндеттері және еңбек қауіпсіздігі."],
+["13.05","Жергілікті желі архитектурасын зерттедім: IP беру, құрылғыларды анықтау, желіні қосу.","Желі","IP-мекенжай бөлу және желілік құрылғыларды табу дағдылары меңгерілді."],
+["14.05","Компьютерге қызмет көрсету: Windows орнату, драйверлер, жүйені жаңарту.","Жабдық","Windows орнату, драйверлерді қондыру, жүйелік құрылғыларды жаңарту."],
+["15.05","Бағдарламалық қамтамасыз етуді орнатып, флеш-диск жасадық.","Жабдық","БҚ орнату және жүктелетін флеш-диск дайындау."],
+["18.05","Желілік қауіпсіздік саясатын және ішкі желі қорғанысын талдадым.","Қауіпсіздік","Қауіпсіздік қызметінің ішкі желі қорғанысы талданды."],
+["19.05","PERCo Server дерекқорын, турникет схемасын және карточка жұмысын қарадым.","Жүйелер","СКУД дерекқоры, турникеттің электрондық схемасы."],
+["20.05","«Кадрлар» ішкі жүйесі: деректер енгізу, есеп жасау, жаңарту.","Жүйелер","Жеке деректерді енгізу, есептер жасау, деректерді жаңарту."],
+["21.05","Құжат айналымы жүйесімен таныстым.","Жүйелер","Электрондық құжаттарды енгізу және сақтау үдерісі."],
+["22.05","Желінің физикалық құрылымы: коммутатор мен маршрутизаторды іске қостым.","Желі","Коммутатор мен маршрутизатордың жұмысы іске қосылды."],
+["25.05","Мекеменің архив видеобақылауларын қарап талдадым.","Қауіпсіздік","Бейнеархив талдауы."],
+["26.05","Жетекші тапсырмасымен ішкі жүйелерді оңтайландыру ұсыныстарын әзірледім.","Жүйелер","Ішкі жүйелерді жақсарту бойынша ұсыныстар."],
+["28.05","Турникет карточкасын ашуды үйрендім.","Жабдық","Карточкамен жұмыс және оның құрылымы."],
+["29.05","Прошивка: турникет, камера, телефон, проектор құрылғыларын жаңарттық.","Жабдық","Төрт түрлі құрылғының микробағдарламасы жаңартылды."]];
+const cats=["Барлығы",...new Set(D.map(d=>d[2]))];let cur="Барлығы";
+function tl(){$("#chips").innerHTML=cats.map(c=>`<button class="chip ${c==cur?'on':''}" data-c="${c}">${c}</button>`).join("");
+$("#tl").innerHTML=D.map((d,i)=>[d,i]).filter(([d])=>cur=="Барлығы"||d[2]==cur).map(([d,i])=>`<div class="card it"><span class="dt">№${i+1} · ${d[0]}.2026</span> <span class="pill">${d[2]}</span><p>${d[1]}</p><div class="more">${d[3]}</div></div>`).join("")}
+document.addEventListener("click",e=>{const c=e.target.closest(".chip[data-c]");if(c){cur=c.dataset.c;tl()}const t=e.target.closest(".it");if(t)t.classList.toggle("open")});tl();
+const R=[["Департамент басшысы","Жалпы жұмысты басқарады, цифрландыру стратегиясын әзірлейді."],["Аға жүйелік инженерлер","Күнделікті қолдауды, желі тұрақтылығын үйлестіреді."],["Техникалық қолдау инженерлері","Компьютерлер, мультимедиа, LAN жұмысын қамтамасыз етеді."],["Жүйелік әкімшілер","Бейнебақылау мен СКУД серверлерін қадағалайды."],["Ақпараттық қауіпсіздік маманы","Киберқауіпсіздік ережелері мен деректер қорғанысын бақылайды."],["ІТ-үйлестіруші","Құжат айналымы, инвентаризация, лицензиялар, Helpdesk."]];
+$("#roles").innerHTML=R.map(r=>`<details><summary>${r[0]}</summary><p>${r[1]}</p></details>`).join("");
+const S={"PERCo Web":["СКУД: турникеттер мен электронды құлыптарды серверге синхрондау","Персоналды тіркеу, RFID-карталар жасау","Лог-файлдарды орталық серверге жинау","API арқылы бейнебақылаумен деректер алмасу","Құрылғылардың online/offline күйін бақылау"],
+"Macroscop":["IP-камералардың битрейт, FPS, кодек параметрлерін баптау","Бет-әлпетті тану және қозғалысты анықтау модульдері","Stream-серверлер және Load Balancing","Архив сақтау саясаты мен backup","RBAC: Active Directory-мен синхрондау"],
+"SADP Tool":["Hikvision құрылғыларын автоматты табу (Discovery)","IP, маска, шлюзді жаппай өзгерту","Құпия сөзді Secret Key/GUID арқылы қалпына келтіру","XML шаблондармен конфигурацияны стандарттау"],
+"Advanced IP Scanner":["Желідегі құрылғыларды түгендеу: IP, MAC, порттар","RDP, Radmin, SSH арқылы қашықтан қосылу","Ping, Tracert, Telnet диагностикасы","CSV/XML/HTML есептерін экспорттау","Portable режимде жұмыс"]};
+$("#tabs").innerHTML=Object.keys(S).map((k,i)=>`<button class="chip ${i?'':'on'}" data-t="${k}">${k}</button>`).join("");
+function tab(k){$("#tp").innerHTML=`<h3 style="margin:0">${k}</h3><ul>${S[k].map(x=>`<li>${x}</li>`).join("")}</ul>`}tab("PERCo Web");
+$("#tabs").onclick=e=>{const b=e.target.closest("[data-t]");if(!b)return;document.querySelectorAll("#tabs .chip").forEach(c=>c.classList.remove("on"));b.classList.add("on");tab(b.dataset.t)};
+const B=[["PERCo Web",99.8],["Macroscop",99.5],["Желілік диагностика",98],["Excel есеп жүйесі",90]];
+$("#bars").innerHTML=B.map(b=>`<div class="bar"><div><span>${b[0]}</span><span>${b[1]}%</span></div><i><b data-w="${b[1]}"></b></i></div>`).join("")+`<small style="color:var(--mu)">Excel үшін мән шартты (есепте сан берілмеген).</small>`;
+const P={"Arena Ultra":1500,"VIP":2500,"Lounge":2000};
+function bk(){const h=+$("#hr").value,p=P[$("#zn").value]*h,d=+$("#mb").value;$("#hv").textContent=h;$("#bk").textContent=`Жиыны: ${Math.round(p*(1-d/100)).toLocaleString("kk-KZ")} ₸ (жеңілдік ${d}%)`}
+["zn","hr","mb"].forEach(i=>$("#"+i).oninput=bk);bk();
+const Q=[["Практика қай бөлімде өтті?",["ДИТЦ","Кітапхана","Бухгалтерия"],0],["СКУД жүйесі қай платформада жұмыс істейді?",["Macroscop","PERCo Web","SADP"],1],["Бейнебақылау серверінің бағдарламасы?",["Macroscop","Excel","Figma"],0],["Hikvision құрылғыларын табатын құрал?",["Advanced IP Scanner","SADP Tool","Radmin"],1],["Техникалық қолдау тобында неше қызметкер бар?",["12","39","100"],1],["Hikvision-де құпия сөзді қалпына келтіруге не қолданылады?",["GUID / Secret Key","Ping","Tracert"],0],["QAIS жобасында қандай AI моделі жоспарланған?",["GPT-2","Llama 3.2 Vision","BERT"],1],["Мүшелік деңгейлері қайсысы?",["Silver, Gold, Black VIP","Basic, Pro","A, B, C"],0]];
+let qi=0,sc=0;
+function qr(){const b=$("#qb");if(qi>=Q.length){saveScore(sc,Q.length);const m=sc>=7?"Керемет! 🏆":sc>=4?"Жақсы, тағы біраз қайталаңыз 👍":"Есепті қайта оқып шығыңыз 📚";b.innerHTML=`<div class="q">Нәтиже: ${sc} / ${Q.length}</div><p>${m}</p><button class="btn" id="rt">Қайта тапсыру</button>`;$("#rt").onclick=()=>{qi=0;sc=0;qr()};return}
+const q=Q[qi];b.innerHTML=`<small style="color:var(--mu)">Сұрақ ${qi+1}/${Q.length}</small><div class="q">${q[0]}</div>`+q[1].map((o,i)=>`<button class="opt" data-i="${i}">${o}</button>`).join("");
+b.querySelectorAll(".opt").forEach(o=>o.onclick=()=>{const k=+o.dataset.i;b.querySelectorAll(".opt").forEach(x=>x.disabled=true);b.children[2+q[2]].classList.add("ok");if(k==q[2])sc++;else o.classList.add("no");setTimeout(()=>{qi++;qr()},900)})}qr();
+let rt=0;$("#st").innerHTML=[1,2,3,4,5].map(n=>`<button data-s="${n}">★</button>`).join("");
+$("#st").onclick=e=>{const b=e.target.closest("button");if(!b)return;rt=+b.dataset.s;$("#st").querySelectorAll("button").forEach((x,i)=>x.classList.toggle("on",i<rt))};
+$("#mk").innerHTML=["Күнделік","ДИТЦ құрылымы","Жүйелер","QAIS жобасы"].map(x=>`<label><input type="checkbox" value="${x}"> ${x}</label>`).join("");
+$("#sb").onclick=()=>{const ch=[...document.querySelectorAll("#mk input:checked")].map(x=>x.value);const r={rt,ch,sv:$("#sv").value,cm:$("#cm").value};try{localStorage.setItem("poll",JSON.stringify(r))}catch(e){}
+$("#res").innerHTML=`<div class="card" style="background:var(--bg)"><b>Рахмет! 🎉</b><br>Баға: ${"★".repeat(rt)||"—"}<br>Ұнаған бөлім: ${ch.join(", ")||"—"}<br>Практика: ${r.sv}</div>`};
+const CTX=`Есеп: Махамбетали Мағжан Ерлікұлы (ВТКО-201, 6B06103), Қ.Жұбанов атындағы АӨУ ДИТЦ бөлімінде 12-29 мамыр 2026 өндірістік практикадан өтті. Күнделік: ${D.map((d,i)=>(i+1)+') '+d[0]+' '+d[1]).join(' ')} ДИТЦ: техникалық қолдау тобы 39 қызметкер (6 корпус, 4 жатақхана, 3 спорт кешені, емхана); серверлік топ 1 маман (Macroscop, PERCo Web, СХД, backup). Жүйелер: ${Object.keys(S).map(k=>k+': '+S[k].join('; ')).join(' | ')}. Талдау: PERCo Web 99,8% сенімділік, 0.3-0.5 с; Macroscop 99,5%, 0.8-1.2 с; желілік диагностика 98%; Excel есеп жүйесінде деректер жоғалу қаупі. Үлестер: Macroscop 40%, PERCo 30%, диагностика 20%, есеп 10%. Жеке тапсырма: QAIS (Qazaq Arena Intelligence System), компьютерлік клуб платформасы: Llama 3.2 Vision, C#/.NET Core, SQL Server, WebSocket; модульдер DashboardController, ArenaAIProvider, BookingManager, MembershipModule, ViewBridge; тарифтер Silver, Gold, Black VIP. Қорытынды: практика желі әкімшілендіру, қауіпсіздік, техникалық қолдау дағдыларын бекітті.`;
+const SYS='Сен — практика есебінің AI көмекшісісің. Тек төмендегі есеп мәліметіне сүйеніп, қазақ тілінде, қысқа (3-5 сөйлем) жауап бер. Есепте жоқ нәрсені ойдан қоспа, жоқ болса, солай айт.\n\nЕСЕП:\n'+CTX;
+let hist=[],busy=false;
+function bub(c,t){const d=document.createElement('div');d.className='m '+c;d.textContent=t;$('#ch').appendChild(d);$('#ch').scrollTop=1e5;return d}
+async function smp(){try{return await claude.use('sample')}catch(e){return null}}
+async function ask(q){if(busy||!q.trim())return;busy=true;bub('u',q);const el=bub('a','…');const s=await smp();if(!s){el.textContent='AI бұл жерде қолжетімсіз. Сайтты claude.ai арқылы ашып көріңіз.';busy=false;return}
+const tr=hist.slice(-6).map(h=>(h[0]=='u'?'Пайдаланушы: ':'Көмекші: ')+h[1]).join('\n');
+try{const r=await s(SYS+'\n\nСӨЙЛЕСУ:\n'+tr+'\nПайдаланушы: '+q+'\nКөмекші:',{onText:e=>{el.textContent=e.text;$('#ch').scrollTop=1e5},modelTier:'quick',cache:false});el.textContent=r.text;hist.push(['u',q],['a',r.text])}catch(e){el.textContent=e&&e.code=='not_granted'?'Рұқсат берілмеді.':e&&e.code=='rate_limited'?'Сұраныс көп, сәл күтіңіз.':'Қате шықты, қайта көріңіз.'}busy=false}
+$('#sg').innerHTML=['Практикада не істедің?','PERCo Web дегеніміз не?','QAIS жобасы туралы айтып бер','Қай жүйе ең сенімді?'].map(x=>`<button class="chip">${x}</button>`).join('');
+$('#sg').onclick=e=>{const b=e.target.closest('.chip');if(b)ask(b.textContent)};
+$('#ai_go').onclick=()=>{const i=$('#ai_in');const v=i.value;i.value='';ask(v)};
+$('#ai_in').onkeydown=e=>{if(e.key=='Enter')$('#ai_go').click()};
+$('#ai_q').onclick=async()=>{const o=$('#ai_qb');o.textContent='Жасалуда…';const s=await smp();if(!s){o.textContent='AI қолжетімсіз.';return}
+try{const j=await s.json(SYS+'\n\nЕсеп бойынша 1 жаңа тест сұрағын жаса. Тек JSON: {"q":"сұрақ","o":["A","B","C"],"a":0} (a — дұрыс жауап индексі 0-2).',{modelTier:'quick',cache:false});
+o.innerHTML='';const q=document.createElement('div');q.className='q';q.textContent=j.q;o.appendChild(q);j.o.forEach((t,i)=>{const b=document.createElement('button');b.className='opt';b.textContent=t;b.onclick=()=>{o.querySelectorAll('.opt').forEach(x=>x.disabled=true);o.children[1+j.a].classList.add('ok');if(i!=j.a)b.classList.add('no')};o.appendChild(b)})}catch(e){o.textContent='Сұрақ жасалмады, қайта басып көріңіз.'}};
+/* ===== Авторизация ===== */
+const TC='MUGALIM2026';let DB=null,sess=null,up=false;
+const esc=s=>String(s??'').replace(/[&<>"']/g,c=>({'&':'&amp;','<':'&lt;','>':'&gt;','"':'&quot;',"'":'&#39;'}[c]));
+const H=async s=>[...new Uint8Array(await crypto.subtle.digest('SHA-256',new TextEncoder().encode(s)))].map(x=>x.toString(16).padStart(2,'0')).join('');
+function lsGet(k){try{return localStorage.getItem(k)}catch(e){return null}}
+function lsSet(k,v){try{localStorage.setItem(k,v);return true}catch(e){return false}}
+async function initDb(){try{DB=await Promise.race([claude.use('db'),new Promise(r=>setTimeout(()=>r(null),4000))])}catch(e){DB=null}bd()}
+function bd(){$('#lg_b').textContent=DB?'Режим: ортақ дерекқор (оқытушы барлық студенттерді көреді). Ескерту: бұл демо-кіру, нақты қауіпсіздік жүйесі емес.':'Режим: деректер тек осы браузерде сақталады. Ескерту: бұл демо-кіру, нақты қауіпсіздік жүйесі емес.'}
+async function getU(l){if(DB){try{const s=await DB.doc('users/'+l).get();return s.exists?s.data():null}catch(e){}}const v=lsGet('u_'+l);return v?JSON.parse(v):null}
+async function putU(l,o){if(DB){try{await DB.doc('users/'+l).set(o);return}catch(e){DB=null;bd()}}lsSet('u_'+l,JSON.stringify(o))}
+async function listU(){const r={};if(DB){try{const s=await DB.collection('users').get();s.docs.forEach(d=>r[d.id]=d.data());return r}catch(e){}}try{for(let i=0;i<localStorage.length;i++){const k=localStorage.key(i);if(k.startsWith('u_'))r[k.slice(2)]=JSON.parse(localStorage.getItem(k))}}catch(e){}return r}
+function setUp(v){up=v;$('#fup').style.display=v?'block':'none';$('#tin').classList.toggle('on',!v);$('#tup').classList.toggle('on',v);$('#lg_go').textContent=v?'Тіркелу':'Кіру';$('#lg_m').textContent='';$('#lg_p').autocomplete=v?'new-password':'current-password'}
+$('#tin').onclick=()=>setUp(false);$('#tup').onclick=()=>setUp(true);
+$('#lg_r').onchange=e=>$('#lg_c').style.display=e.target.value=='teacher'?'block':'none';
+$('#ub').onclick=()=>{if(sess)location.hash='#cab';else $('#lg').classList.add('on')};
+$('#lg_g').onclick=()=>$('#lg').classList.remove('on');
+function err(t,ok){const m=$('#lg_m');m.textContent=t;m.className='err'+(ok?' okc':'')}
+$('#lg_go').onclick=async()=>{const l=$('#lg_l').value.trim().toLowerCase(),p=$('#lg_p').value;
+if(!/^[a-z0-9_.-]{3,20}$/.test(l))return err('Логин: 3–20 таңба, тек a-z, 0-9, _ . -');
+if(p.length<6)return err('Құпия сөз кемінде 6 таңба болсын');
+if(up){const n=$('#lg_n').value.trim(),r=$('#lg_r').value;if(!n)return err('Аты-жөніңізді жазыңыз');if(r=='teacher'&&$('#lg_c').value.trim()!=TC)return err('Оқытушы коды дұрыс емес');
+if(await getU(l))return err('Бұл логин бос емес');const salt=crypto.randomUUID();await putU(l,{name:n,role:r,salt,hash:await H(salt+p),created:Date.now(),best:null,grade:'',note:''});login(l,n,r)}
+else{const u=await getU(l);if(!u||u.hash!=await H(u.salt+p))return err('Логин немесе құпия сөз қате');login(l,u.name,u.role)}};
+function login(l,n,r){sess={l,name:n,role:r};try{sessionStorage.setItem('sess',JSON.stringify(sess))}catch(e){}$('#lg').classList.remove('on');$('#lg_p').value='';err('');ui();location.hash='#cab'}
+$('#lo').onclick=()=>{sess=null;try{sessionStorage.removeItem('sess')}catch(e){}ui();location.hash='#top'};
+function ui(){$('#ub').textContent=sess?(sess.role=='teacher'?'👩‍🏫 ':'🎓 ')+sess.name.split(' ')[0]:'🔐 Кіру';$('#cab').style.display=sess?'block':'none';if(sess)cab()}
+async function cab(){const u=await getU(sess.l)||{};const T=sess.role=='teacher';$('#cb_s').textContent=(T?'Оқытушы: ':'Студент: ')+sess.name+' (@'+sess.l+')';
+if(!T){$('#cb').innerHTML=`<div class="two"><div class="card stat"><b>${u.best==null?'—':esc(u.best)+'/'+Q.length}</b><small>тесттің үздік нәтижесі</small></div><div class="card stat"><b>${esc(u.grade)||'—'}</b><small>оқытушының бағасы</small></div></div><div class="card" style="margin-top:14px"><b>Оқытушы пікірі</b><p>${esc(u.note)||'Әзірге пікір жоқ.'}</p></div>`;return}
+const us=await listU(),st=Object.entries(us).filter(([k,v])=>v.role=='student');const sc=st.filter(([k,v])=>v.best!=null),av=sc.length?(sc.reduce((a,[k,v])=>a+v.best,0)/sc.length).toFixed(1):'—';
+$('#cb').innerHTML=`<div class="two"><div class="card stat"><b>${st.length}</b><small>студент</small></div><div class="card stat"><b>${av}</b><small>орташа тест ұпайы</small></div></div><div class="stu" id="sl" style="margin-top:14px"></div>`;
+if(!st.length)$('#sl').innerHTML='<div class="card">Әзірге студент тіркелмеген.</div>';
+st.forEach(([k,v])=>{const d=document.createElement('div');d.className='card';d.innerHTML=`<b>${esc(v.name)}</b> <span class="pill">@${esc(k)}</span><p style="margin:4px 0 10px;color:var(--mu)">Тест: ${v.best==null?'тапсырмаған':esc(v.best)+'/'+Q.length}</p><div class="row"><input class="fi g" placeholder="Баға" value="${esc(v.grade)}" style="max-width:90px;margin:0"><input class="fi n" placeholder="Пікір" value="${esc(v.note)}" style="flex:1;margin:0"><button class="btn">Сақтау</button></div>`;
+d.querySelector('button').onclick=async e=>{const f=await getU(k)||v;f.grade=d.querySelector('.g').value;f.note=d.querySelector('.n').value;await putU(k,f);e.target.textContent='✓ Сақталды'};$('#sl').appendChild(d)})}
+async function saveScore(s,n){if(!sess||sess.role!='student')return;const u=await getU(sess.l);if(!u)return;u.best=Math.max(u.best??0,s);u.last=s;await putU(sess.l,u);const b=$('#qb'),p=document.createElement('p');p.style.color='var(--ac2)';p.textContent='Нәтиже кабинетіңізде сақталды ✓';setTimeout(()=>b.appendChild(p),0);cab()}
+try{const x=sessionStorage.getItem('sess');if(x){sess=JSON.parse(x);ui()}}catch(e){}
+async function seed(){for(const [l,n,r,p] of [['magzhan','Махамбетали Мағжан','student','magzhan2026'],['teacher','Оқытушы','teacher','teacher2026']]){if(!await getU(l)){const salt=crypto.randomUUID();await putU(l,{name:n,role:r,salt,hash:await H(salt+p),created:Date.now(),best:null,grade:'',note:''})}}}
+setUp(false);initDb().then(seed);if(!sess)setTimeout(()=>$('#lg').classList.add('on'),600);
+const io=new IntersectionObserver(es=>es.forEach(e=>{if(e.isIntersecting){e.target.classList.add("in");e.target.querySelectorAll("[data-w]").forEach(b=>b.style.width=b.dataset.w+"%")}}),{threshold:.12});
+document.querySelectorAll(".rv").forEach(x=>io.observe(x));
+document.querySelectorAll("[data-n]").forEach(el=>{const n=+el.dataset.n;let c=0;const t=setInterval(()=>{c++;el.textContent=c;if(c>=n)clearInterval(t)},60)});
+addEventListener("scroll",()=>{const h=document.documentElement;$("#pr").style.width=(h.scrollTop/(h.scrollHeight-h.clientHeight)*100)+"%";let id="top";document.querySelectorAll("section").forEach(s=>{if(s.getBoundingClientRect().top<120)id=s.id});document.querySelectorAll("nav a").forEach(a=>a.classList.toggle("on",a.getAttribute("href")=="#"+id))});
+$("#th").onclick=()=>{const r=document.documentElement,d=r.dataset.theme!="light";r.dataset.theme=d?"light":"dark"};
+
+/* ===== 3D: орталық цифрлық түйін + 4 жүйе орбитасы ===== */
+(()=>{const cv=document.getElementById('gl');if(!cv||!window.THREE)return;const T=THREE;let R;try{R=new T.WebGLRenderer({canvas:cv,alpha:true,antialias:true})}catch(e){return}
+R.setPixelRatio(Math.min(devicePixelRatio,2));const S=new T.Scene(),C=new T.PerspectiveCamera(42,1,.1,100);C.position.set(0,0,10);
+S.add(new T.AmbientLight(0x6f78c8,.7));const p1=new T.PointLight(0x8b7dff,2.2,40);p1.position.set(4,4,6);S.add(p1);const p2=new T.PointLight(0x2ee6c8,1.6,40);p2.position.set(-5,-3,4);S.add(p2);
+const G=new T.Group();S.add(G);
+const core=new T.Mesh(new T.IcosahedronGeometry(1.15,1),new T.MeshPhongMaterial({color:0x2a2470,emissive:0x1a1450,shininess:90,flatShading:true}));G.add(core);
+const wire=new T.Mesh(new T.IcosahedronGeometry(1.55,2),new T.MeshBasicMaterial({color:0x8b7dff,wireframe:true,transparent:true,opacity:.35}));G.add(wire);
+const sats=[0x8b7dff,0x2ee6c8,0xffb020,0xff5d7a].map((c,i)=>{const o=new T.Group();o.rotation.set(.5+i*.6,i*.9,i*.35);G.add(o);const r=2.5+i*.55;
+const ring=new T.Mesh(new T.TorusGeometry(r,.008,8,160),new T.MeshBasicMaterial({color:c,transparent:true,opacity:.45}));ring.rotation.x=Math.PI/2;o.add(ring);
+const m=new T.Mesh(new T.SphereGeometry(.17+.02*i,24,24),new T.MeshPhongMaterial({color:c,emissive:c,emissiveIntensity:.6}));o.add(m);
+const lg=new T.BufferGeometry().setFromPoints([new T.Vector3(),new T.Vector3()]);G.add(new T.Line(lg,new T.LineBasicMaterial({color:c,transparent:true,opacity:.5})));
+return{m,r,lg,o,n:['Macroscop','PERCo Web','Advanced IP Scanner','SADP Tool'][i],s:.5-i*.09+(i%2?.2:0),p:i*1.7}});
+const N=260,pa=new Float32Array(N*3);for(let i=0;i<N;i++){const r=4+Math.random()*5,a=Math.random()*6.283,b=Math.acos(2*Math.random()-1);pa.set([r*Math.sin(b)*Math.cos(a),r*Math.cos(b),r*Math.sin(b)*Math.sin(a)],i*3)}
+const pg=new T.BufferGeometry();pg.setAttribute('position',new T.BufferAttribute(pa,3));const pts=new T.Points(pg,new T.PointsMaterial({color:0xaab2ff,size:.04,transparent:true,opacity:.7}));S.add(pts);
+function rs(){const w=cv.clientWidth,h=cv.clientHeight;if(!w||!h)return;R.setSize(w,h,false);C.aspect=w/h;C.position.z=w/h<.9?13:10;C.updateProjectionMatrix()}
+new ResizeObserver(rs).observe(cv);rs();
+let mx=0,my=0,tx=0,ty=0,vis=true,run=false;const k=matchMedia('(prefers-reduced-motion:reduce)').matches?0:1;
+addEventListener('pointermove',e=>{mx=e.clientX/innerWidth-.5;my=e.clientY/innerHeight-.5});
+function tick(t){if(!vis){run=false;return}requestAnimationFrame(tick);const s=t/1000;tx+=(mx-tx)*.05;ty+=(my-ty)*.05;
+G.rotation.y=s*.12*k+tx*.8;G.rotation.x=.2+ty*.5;core.rotation.y=s*.3*k;core.scale.setScalar(1+Math.sin(s*1.6)*.03*k);wire.rotation.y=-s*.2*k;pts.rotation.y=s*.02*k;
+sats.forEach(q=>{q.m.scale.setScalar(q===hov?1.7:1);const a=s*q.s*k+q.p;q.m.position.set(Math.cos(a)*q.r,0,Math.sin(a)*q.r);const v=q.m.position.clone().applyEuler(q.o.rotation),A=q.lg.attributes.position;A.setXYZ(1,v.x,v.y,v.z);A.needsUpdate=true});
+R.render(S,C)}
+let hov=null;const rc=new T.Raycaster(),mv=new T.Vector2(),tip=document.createElement('div');tip.id='tip';document.body.appendChild(tip);
+function pick(e){const b=cv.getBoundingClientRect();if(e.clientX<b.left||e.clientX>b.right||e.clientY<b.top||e.clientY>b.bottom)return null;mv.set((e.clientX-b.left)/b.width*2-1,-((e.clientY-b.top)/b.height)*2+1);rc.setFromCamera(mv,C);const h=rc.intersectObjects(sats.map(q=>q.m))[0];return h?sats.find(q=>q.m===h.object):null}
+addEventListener('pointermove',e=>{const q=pick(e);hov=q;tip.style.display=q?'block':'none';if(q){tip.textContent=q.n+' — ашу';tip.style.left=e.clientX+14+'px';tip.style.top=e.clientY+14+'px'}document.body.style.cursor=q?'pointer':''});
+addEventListener('click',e=>{if(e.target.closest('.card,.btn,a,button,input'))return;const q=pick(e);if(!q)return;const b=document.querySelector('#tabs [data-t="'+q.n+'"]');if(b)b.click();document.getElementById('sys').scrollIntoView({behavior:'smooth'})});
+function go(){if(!run){run=true;requestAnimationFrame(tick)}}
+new IntersectionObserver(e=>{vis=e[0].isIntersecting;if(vis)go()}).observe(cv.parentElement);go();
+})();
+document.querySelectorAll('.stat,.tier').forEach(el=>{el.style.transition='transform .2s,border-color .25s,box-shadow .25s';el.addEventListener('pointermove',e=>{const r=el.getBoundingClientRect(),x=(e.clientX-r.left)/r.width-.5,y=(e.clientY-r.top)/r.height-.5;el.style.transform=`perspective(600px) rotateY(${x*10}deg) rotateX(${-y*10}deg) translateY(-3px)`});el.addEventListener('pointerleave',()=>el.style.transform='')});
+/* ===== Карточка жарығы ===== */
+document.addEventListener('pointermove',e=>{const c=e.target.closest&&e.target.closest('.card');if(c){const r=c.getBoundingClientRect();c.style.setProperty('--mx',e.clientX-r.left+'px');c.style.setProperty('--my',e.clientY-r.top+'px')}});
+/* ===== Терминал ===== */
+(()=>{const o=$('#to'),i=$('#ti'),hs=[];let hi=0,bz=false;
+const P=t=>{const d=document.createElement('div');d.textContent=t;o.appendChild(d);o.scrollTop=o.scrollHeight};
+const X={help:()=>P('help · days · day N · systems · stats · qais · ping <host> · whoami · theme · clear'),
+days:()=>D.forEach((d,k)=>P((k+1)+'. '+d[0]+'  ['+d[2]+']')),
+day:a=>{const d=D[a-1];P(d?d[0]+'.2026 — '+d[1]:'Күн нөмірі 1–'+D.length+' аралығында болсын')},
+systems:()=>Object.keys(S).forEach(k=>P('• '+k+' ('+S[k].length+' мүмкіндік)')),
+stats:()=>B.forEach(b=>P(b[0].padEnd(22)+b[1]+'%')),
+qais:()=>{P('QAIS: Llama 3.2 Vision · C#/.NET Core · SQL Server · WebSocket');P('Деңгейлер: Silver → Gold → Black VIP')},
+whoami:()=>P('Махамбетали Мағжан Ерлікұлы · ВТКО-201 · ДИТЦ'),
+theme:()=>{$('#th').click();P('Тақырып ауыстырылды')},
+clear:()=>{o.textContent=''},
+ping:async h=>{h=h||'dits.local';bz=true;P('PING '+h+' ...');for(let n=0;n<4;n++){await new Promise(r=>setTimeout(r,450));P('Reply from '+h+': time='+(1+Math.floor(Math.random()*9))+'ms TTL=64')}P('4 пакет жіберілді, 4 алынды, 0% жоғалту');bz=false}};
+i.onkeydown=async e=>{if(e.key=='ArrowUp'&&hs.length){hi=Math.max(0,hi-1);i.value=hs[hi];return}if(e.key!='Enter'||bz)return;
+const v=i.value.trim();if(!v)return;i.value='';P('$ '+v);hs.push(v);hi=hs.length;const[c,...a]=v.split(/\s+/),f=X[c.toLowerCase()];if(f)await f(a[0]);else P('Белгісіз команда: '+c+'. help деп жазыңыз')};
+P('ДИТЦ терминалына қош келдіңіз. help деп жазыңыз.')})();
+</script>
+</body>
+</html>
