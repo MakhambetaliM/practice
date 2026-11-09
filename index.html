@@ -104,7 +104,7 @@ h2{letter-spacing:-.02em}
 <body>
 <div id="pr"></div>
 <nav>
-<a href="#top">Басты</a><a href="#days">Күнделік</a><a href="#org">ДИТЦ</a><a href="#sys">Жүйелер</a><a href="#qais">QAIS</a><a href="#term">Терминал</a><a href="#ai">AI ✨</a><a href="#quiz">Тест</a><a href="#poll">Сауалнама</a>
+<a href="#top">Басты</a><a href="#days">Күнделік</a><a href="#org">ДИТЦ</a><a href="#sys">Жүйелер</a><a href="#qais">QAIS</a><a href="#term">Терминал</a><a href="#quiz">Тест</a><a href="#poll">Сауалнама</a>
 <button id="ub" class="chip">🔐 Кіру</button><button id="th" aria-label="Тақырып">🌓</button>
 </nav>
 
@@ -199,18 +199,6 @@ h2{letter-spacing:-.02em}
 <div class="term"><div class="th2"><i></i><i></i><i></i><span>magzhan@dits:~</span></div><div id="to"></div><div class="tin"><span>$</span><input id="ti" autocomplete="off" autocapitalize="none" spellcheck="false" aria-label="Команда"></div></div>
 </section>
 
-<section id="ai" class="rv">
-<h2>AI көмекші ✨</h2>
-<p class="sub">Claude практика есебі бойынша сұрақтарға жауап береді. Бірінші сұрақта рұқсат сұралуы мүмкін.</p>
-<div class="card">
-<div class="chips" id="sg"></div>
-<div class="chat" id="ch"><div class="m a">Сәлем! Мен Мағжанның практика есебі туралы сұрақтарға жауап беремін. Не білгіңіз келеді?</div></div>
-<div class="row"><input id="ai_in" placeholder="Сұрағыңызды жазыңыз..."><button class="btn" id="ai_go">Жіберу</button></div>
-<p style="margin:12px 0 0"><button class="btn o" id="ai_q">🎲 AI-дан жаңа тест сұрағы</button></p>
-<div id="ai_qb"></div>
-</div>
-</section>
-
 <section id="quiz" class="rv">
 <h2>Мини-тест</h2>
 <p class="sub">Практика материалы бойынша 8 сұрақ.</p>
@@ -278,21 +266,6 @@ $("#st").onclick=e=>{const b=e.target.closest("button");if(!b)return;rt=+b.datas
 $("#mk").innerHTML=["Күнделік","ДИТЦ құрылымы","Жүйелер","QAIS жобасы"].map(x=>`<label><input type="checkbox" value="${x}"> ${x}</label>`).join("");
 $("#sb").onclick=()=>{const ch=[...document.querySelectorAll("#mk input:checked")].map(x=>x.value);const r={rt,ch,sv:$("#sv").value,cm:$("#cm").value};try{localStorage.setItem("poll",JSON.stringify(r))}catch(e){}
 $("#res").innerHTML=`<div class="card" style="background:var(--bg)"><b>Рахмет! 🎉</b><br>Баға: ${"★".repeat(rt)||"—"}<br>Ұнаған бөлім: ${ch.join(", ")||"—"}<br>Практика: ${r.sv}</div>`};
-const CTX=`Есеп: Махамбетали Мағжан Ерлікұлы (ВТКО-201, 6B06103), Қ.Жұбанов атындағы АӨУ ДИТЦ бөлімінде 12-29 мамыр 2026 өндірістік практикадан өтті. Күнделік: ${D.map((d,i)=>(i+1)+') '+d[0]+' '+d[1]).join(' ')} ДИТЦ: техникалық қолдау тобы 39 қызметкер (6 корпус, 4 жатақхана, 3 спорт кешені, емхана); серверлік топ 1 маман (Macroscop, PERCo Web, СХД, backup). Жүйелер: ${Object.keys(S).map(k=>k+': '+S[k].join('; ')).join(' | ')}. Талдау: PERCo Web 99,8% сенімділік, 0.3-0.5 с; Macroscop 99,5%, 0.8-1.2 с; желілік диагностика 98%; Excel есеп жүйесінде деректер жоғалу қаупі. Үлестер: Macroscop 40%, PERCo 30%, диагностика 20%, есеп 10%. Жеке тапсырма: QAIS (Qazaq Arena Intelligence System), компьютерлік клуб платформасы: Llama 3.2 Vision, C#/.NET Core, SQL Server, WebSocket; модульдер DashboardController, ArenaAIProvider, BookingManager, MembershipModule, ViewBridge; тарифтер Silver, Gold, Black VIP. Қорытынды: практика желі әкімшілендіру, қауіпсіздік, техникалық қолдау дағдыларын бекітті.`;
-const SYS='Сен — практика есебінің AI көмекшісісің. Тек төмендегі есеп мәліметіне сүйеніп, қазақ тілінде, қысқа (3-5 сөйлем) жауап бер. Есепте жоқ нәрсені ойдан қоспа, жоқ болса, солай айт.\n\nЕСЕП:\n'+CTX;
-let hist=[],busy=false;
-function bub(c,t){const d=document.createElement('div');d.className='m '+c;d.textContent=t;$('#ch').appendChild(d);$('#ch').scrollTop=1e5;return d}
-async function smp(){try{return await claude.use('sample')}catch(e){return null}}
-async function ask(q){if(busy||!q.trim())return;busy=true;bub('u',q);const el=bub('a','…');const s=await smp();if(!s){el.textContent='AI бұл жерде қолжетімсіз. Сайтты claude.ai арқылы ашып көріңіз.';busy=false;return}
-const tr=hist.slice(-6).map(h=>(h[0]=='u'?'Пайдаланушы: ':'Көмекші: ')+h[1]).join('\n');
-try{const r=await s(SYS+'\n\nСӨЙЛЕСУ:\n'+tr+'\nПайдаланушы: '+q+'\nКөмекші:',{onText:e=>{el.textContent=e.text;$('#ch').scrollTop=1e5},modelTier:'quick',cache:false});el.textContent=r.text;hist.push(['u',q],['a',r.text])}catch(e){el.textContent=e&&e.code=='not_granted'?'Рұқсат берілмеді.':e&&e.code=='rate_limited'?'Сұраныс көп, сәл күтіңіз.':'Қате шықты, қайта көріңіз.'}busy=false}
-$('#sg').innerHTML=['Практикада не істедің?','PERCo Web дегеніміз не?','QAIS жобасы туралы айтып бер','Қай жүйе ең сенімді?'].map(x=>`<button class="chip">${x}</button>`).join('');
-$('#sg').onclick=e=>{const b=e.target.closest('.chip');if(b)ask(b.textContent)};
-$('#ai_go').onclick=()=>{const i=$('#ai_in');const v=i.value;i.value='';ask(v)};
-$('#ai_in').onkeydown=e=>{if(e.key=='Enter')$('#ai_go').click()};
-$('#ai_q').onclick=async()=>{const o=$('#ai_qb');o.textContent='Жасалуда…';const s=await smp();if(!s){o.textContent='AI қолжетімсіз.';return}
-try{const j=await s.json(SYS+'\n\nЕсеп бойынша 1 жаңа тест сұрағын жаса. Тек JSON: {"q":"сұрақ","o":["A","B","C"],"a":0} (a — дұрыс жауап индексі 0-2).',{modelTier:'quick',cache:false});
-o.innerHTML='';const q=document.createElement('div');q.className='q';q.textContent=j.q;o.appendChild(q);j.o.forEach((t,i)=>{const b=document.createElement('button');b.className='opt';b.textContent=t;b.onclick=()=>{o.querySelectorAll('.opt').forEach(x=>x.disabled=true);o.children[1+j.a].classList.add('ok');if(i!=j.a)b.classList.add('no')};o.appendChild(b)})}catch(e){o.textContent='Сұрақ жасалмады, қайта басып көріңіз.'}};
 /* ===== Авторизация ===== */
 const TC='MUGALIM2026';let DB=null,sess=null,up=false;
 const esc=s=>String(s??'').replace(/[&<>"']/g,c=>({'&':'&amp;','<':'&lt;','>':'&gt;','"':'&quot;',"'":'&#39;'}[c]));
